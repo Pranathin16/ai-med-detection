@@ -68,3 +68,47 @@ curl -s -l https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
 cd
 git clone https://github.com/MIC-DKFZ/nnDetection.git
+wsl –install
+wsl -l -v
+wsl --set-version Ubuntu-20.04 2
+cd / mnt 
+ls
+cd
+pwd
+curl https://get.docker.com | sh
+sudo docker ps
+distribution=$(. /etc/os-release;echo $D$VERSION_I)
+curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+cat /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+docker run --rm --gpus all nvidia/cuda:12.6.2-base nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.8.0-base nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.3.1-base nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:11.8.0-base nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.8.0-runtime-ubuntu20.04 nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:11.8.0-runtime-ubuntu20.04 nvidia-smi
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+docker search nvidia/cuda\
+lsb_release -cs
+curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+docker run --rm --gpus all nvidia/cuda:11.3.1-base nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:11.8.0-base nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.8.0-devel-ubuntu20.04 nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.8.0-base nvidia-smi
+sudo usermod -aG docker $USER
+sudo systemctl restart docker
+docker run --rm --gpus all nvidia/cuda:11.8.0-runtime-ubuntu20.04 nvidia-smi
+docker pull nvidia/cuda:lates
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+sudo docker pull nvidia/cuda:11.8.0-runtime
+sudo docker pull nvidia/cuda:11.8.0-devel
