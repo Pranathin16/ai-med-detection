@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Step 1: Setup Conda Environment
+conda create --name nndet_venv python=3.8 -y
+source activate nndet_venv
+
+# Step 2: Clone nnDetection repository
+git clone https://github.com/MIC-DKFZ/nnDetection.git
+cd nnDetection
+
+# Step 3: Set C++ and C compilers
+export CXX=$CONDA_PREFIX/bin/x86_64-conda_cos6-linux-gnu-c++
+export CC=$CONDA_PREFIX/bin/x86_64-conda_cos6-linux-gnu-cc
+
+# Step 4: Install required compilers
+conda install gxx_linux-64==9.3.0 -y
+conda install cuda -c nvidia/label/cuda-11.3.1 -y
+conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch -y
+
+# Step 5: Install Python libraries
+pip install -r requirements.txt
+pip install hydra-core --upgrade --pre
+pip install git+https://github.com/mibaumgartner/pytorch_model_summary.git
+
+# Step 6: Force CUDA and install nnDetection in editable mode
+FORCE_CUDA=1 pip install -v -e .
+
+# Step 7: Test installation with toy dataset
+# Generate small toy dataset
+nndet_example
+
+# Optionally, generate full dataset for further prototyping (uncomment if needed)
+# nndet_example --full
+
+# Step 8: Prepare a specific dataset (e.g., ProstateX)
+# python prepare.py Task021_ProstateX
+
+# Optional: Set up environment variables if necessary
+# export det_data=/path/to/data
+# export det_models=/path/to/models
+# export OMP_NUM_THREADS=1
+# export det_num_threads=12
