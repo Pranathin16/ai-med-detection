@@ -40,3 +40,11 @@ nndet_example
 # export det_models=/path/to/models
 # export OMP_NUM_THREADS=1
 # export det_num_threads=12
+ProstateX
+{det_data}
+    Task021_ProstateX
+        raw
+            ktrains
+            ProstateX
+            ProstateX-TrainingLesionInformationv2
+            rcuocolo-PROSTATEx_masks-e344452
